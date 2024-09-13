@@ -7,6 +7,8 @@ const FORM_DATA_KEY = "feedback-form-state";
 const formEl = document.querySelector(".feedback-form");
 const textArea = formEl.querySelector("textarea");
 const inputEl = formEl.querySelector("input");
+formEl.addEventListener("submit", formHandler);
+formEl.addEventListener("input", inputFormHandler);
 
 const formHandler = event => {
   event.preventDefault();
@@ -15,26 +17,23 @@ const formHandler = event => {
     alert("Fill please all fields");
     return;
   }
+
+  formData.email = email.value;
+  formData.message = message.value;
+
   console.log(formData);
   localStorage.removeItem(FORM_DATA_KEY);
-  formData.email = "";
-  formData.message = "";
+  formData = { email: "", message: "" };
   event.target.reset();
 };
 
-formEl.addEventListener("submit", formHandler);
-textArea.addEventListener("input", textAreaHandler);
-inputEl.addEventListener("input", inputHandler);
-
-function inputHandler(evt) {
-  formData.email = evt.target.value;
+// грузим на localStorage //
+function inputFormHandler(evt) {
+  formData[evt.target.name] = evt.target.value;
   localStorage.setItem(FORM_DATA_KEY, JSON.stringify(formData));
 }
 
-function textAreaHandler(evt) {
-  formData.message = evt.target.value;
-  localStorage.setItem(FORM_DATA_KEY, JSON.stringify(formData));
-}
+// відновлення даних //
 
 let formDataLocalS = localStorage.getItem(FORM_DATA_KEY);
 if (formDataLocalS) {
