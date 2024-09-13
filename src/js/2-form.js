@@ -25,15 +25,18 @@ textArea.addEventListener("input", textAreaHandler);
 inputEl.addEventListener("input", inputHandler);
 
 function inputHandler(evt) {
-  console.log(evt.target.value);
   formData.email = evt.target.value;
   localStorage.setItem(FORM_DATA_KEY, JSON.stringify(formData));
 }
 
 function textAreaHandler(evt) {
-  console.log(evt.target.value);
   formData.message = evt.target.value;
   localStorage.setItem(FORM_DATA_KEY, JSON.stringify(formData));
 }
 
-console.log(textArea);
+let formDataLocalS = localStorage.getItem(FORM_DATA_KEY);
+if (formDataLocalS) {
+  let parseFromStorage = JSON.parse(formDataLocalS);
+  textArea.value = parseFromStorage.message;
+  inputEl.value = parseFromStorage.email;
+}
