@@ -17,6 +17,8 @@ const formHandler = event => {
   }
   console.log(formData);
   localStorage.removeItem(FORM_DATA_KEY);
+  formData.email = "";
+  formData.message = "";
   event.target.reset();
 };
 
