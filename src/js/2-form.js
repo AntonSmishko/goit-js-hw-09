@@ -29,7 +29,7 @@ const formHandler = event => {
 
 formEl.addEventListener("submit", formHandler);
 
-// грузим на localStorage //
+//* грузим на localStorage *//
 function inputFormHandler(evt) {
   formData[evt.target.name] = evt.target.value;
   localStorage.setItem(FORM_DATA_KEY, JSON.stringify(formData));
