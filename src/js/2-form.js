@@ -7,7 +7,7 @@ const FORM_DATA_KEY = "feedback-form-state";
 const formEl = document.querySelector(".feedback-form");
 const textArea = formEl.querySelector("textarea");
 const inputEl = formEl.querySelector("input");
-formEl.addEventListener("submit", formHandler);
+
 formEl.addEventListener("input", inputFormHandler);
 
 const formHandler = event => {
@@ -26,6 +26,8 @@ const formHandler = event => {
   formData = { email: "", message: "" };
   event.target.reset();
 };
+
+formEl.addEventListener("submit", formHandler);
 
 // грузим на localStorage //
 function inputFormHandler(evt) {
